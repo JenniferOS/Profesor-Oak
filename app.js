@@ -11,6 +11,7 @@ client.on("ready", () => {
     console.log("Eres mi nieta pero no recuerdo tu nombre :(");
  });
 
+ client.on('error', console.error);
  
  client.on("message", (message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
