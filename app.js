@@ -17,11 +17,12 @@ client.on("ready", () => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
-    /* * * * * * * * * * * * 
-    * COMANDOS: 
-    * 1.- Cambiar nick
-    * 
-    * * * * * * * * * * * * */
+    /* * * * * * * * * * * * * * * * * 
+    * COMANDOS:                      *
+    * 1.- Cambiar nick               *
+    * 2.- reporte de usuarios        *
+    *                                *
+    * * * * * * * * * * * * * * * * */
 
     // 1
     if (message.content.startsWith(prefix+'nickname') || message.content.startsWith(prefix+'nick')|| message.content.startsWith(prefix+'mote')) {
@@ -43,7 +44,29 @@ client.on("ready", () => {
         }
 
     }
+    
+    //2
+    if (message.content.startsWith(`${prefix}report`)){
+       //obtiene el nombre del usuario
+       let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0])); 
+       //Si no etiquetas a nadie te informa de que debes hacerlo
+       if(!rUser) return message.channel.send("¡Tienes que etiquetar a un usuario!");
+       let reason = args.join("  ").slice(22);
+        
+       let report = new Discord.RichEmbed()
+       .setDescription("Reporte")
+       .addField("Usuario reportado", `${rUser}`)
+       .addField("Canal:", message.channel)
+       .addField("Razon: ", reason);
+        
+       let staff = message.guild.channels.find(`name`, "staff");
 
+       message.delete().catch(_O_o=>{}); //borra el ultimo mensaje enviado NOTA: REQUIERE PERMISOS
+       staff.send(report);
+
+       return message.channel.send("*El reporte ha sido mandado al staff*");
+    }
+     
 
     if (message.channel.id === '556358295762239494') {
         message.react('✅')
