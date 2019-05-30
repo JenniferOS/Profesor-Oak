@@ -21,7 +21,8 @@ client.on("ready", () => {
     * COMANDOS:                      *
     * 1.- Cambiar nick               *
     * 2.- reporte de usuarios        *
-    *                                *
+    * 3.- Sugerencias                *
+    * 4.- Emotes (Legacy)            *
     * * * * * * * * * * * * * * * * */
 
     // 1
@@ -80,6 +81,14 @@ client.on("ready", () => {
             .catch(() => console.log('x____x!'));
     }
 
+    //3
+    if(message.content.includes(":")){var e = message.content.slice(message.content.indexOf(":")+1);
+     var ext = e.slice(0, e.indexOf(":"));
+    var emote = client.emojis.find(emoji => emoji.name == ext)
+    var es = message.guild.emojis.find(emoji => emoji.name == ext)
+  if(message.author.bot){} else {
+    if(emote){if(es){}
+        else{message.channel.send(`${emote}`)}}}}
 });
 
 
