@@ -19,21 +19,21 @@ client.on('ready', () => {
 
 client.on('message', message =>{
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
-    if (!client.commands.has(command)) return;
-    console.log(prefix, token);
-
-    if (message.channel.id === '556358295762239494') {
+    if (!message.content.startsWith(prefix) || message.author.bot) return; 
+ 
+	const args = message.content.slice(prefix.length).split(/ +/); 
+	const command = args.shift().toLowerCase(); 
+    if (!client.commands.has(command)) return; 
+    console.log(prefix, token); 
+ 
+    if (message.channel.id === '556358295762239494') { 
         message.react('✅')
             .then(() => message.react('❎'))
             .catch(() => console.log('x____x!'));
     }
 
     if(message.content.includes(":")){var e = message.content.slice(message.content.indexOf(":")+1);
-     var ext = e.slice(0, e.indexOf(":"));
+    var ext = e.slice(0, e.indexOf(":"));
     var emote = client.emojis.find(emoji => emoji.name == ext)
     var es = message.guild.emojis.find(emoji => emoji.name == ext)
     if(message.author.bot){} else {
@@ -41,7 +41,7 @@ client.on('message', message =>{
             else{message.channel.send(`${emote}`)}}}}
 
     try {
-        client.commands.get(command).execute(message, args);
+        client.commands.get(command).execute(message, args, client);
     } catch (error) {
         console.error(error);
         message.reply('El cómando que escribiste es inválido o no existe');
