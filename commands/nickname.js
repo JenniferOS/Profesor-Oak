@@ -15,8 +15,9 @@ module.exports = {
             // Guarda el nuevo nick como parte de los argumentos del comando
             let newNick = args.join(" ");
             if (message.member.roles.some(role => role.name === 'Novato')) {
-                if (!args) {
-                    return message.member.setNickname(message.author.username);
+                if (!newNick) {
+                   message.member.setNickname(message.author.username);
+                    return message.channel.send(`Tu nombre es entonces ${message.author.username}? Genial!`);
                 } else {
                     message.member.setNickname(newNick);
                     return message.channel.send(`No se si ${newNick} es nombre de Chico o Chica, pero buena elección!`);
